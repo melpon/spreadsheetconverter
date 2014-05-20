@@ -22,7 +22,7 @@ namespace MasterDataTable
             obj.FamilyName = (string)row[1];
             obj.FirstName = (string)row[2];
             obj.Birthday = DateTime.Parse((string)row[3]);
-            obj.Preference = (int)(long)row[4];
+            obj._Preference = (int)(long)row[4];
             return obj;
         }
 

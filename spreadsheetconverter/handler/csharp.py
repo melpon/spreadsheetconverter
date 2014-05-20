@@ -50,7 +50,7 @@ class Handler(BaseHandler):
                 'datetime': 'DateTime.Parse((string){0})',
                 'foreignkey': '(int)(long){0}',
             }[type_]
-            init = """obj.{0} = {1};""".format(name, cast.format("row[{0}]".format(i)))
+            init = """obj.{0} = {1};""".format(member_name, cast.format("row[{0}]".format(i)))
             inits.append(init)
 
         return """/*
