@@ -1,0 +1,30 @@
+target: "xls:///in.xlsx#都道府県"
+row: 5
+fields: &fields
+- column: ID
+  name: "ID"
+  type: int
+
+- column: Name
+  name: "名前"
+  type: char
+
+- column: NameKana
+  name: "名前（かな）"
+  type: char
+
+- column: Capital
+  name: "県庁所在地"
+  type: char
+
+- column: CapitalKana
+  name: "県庁所在地（かな）"
+  type: char
+handler:
+  type: csharp
+  csharp: cs_preference.cs
+  json: cs_preference.json
+  name: Preference
+  indent: 4
+  sort_keys: true
+  fields: *fields

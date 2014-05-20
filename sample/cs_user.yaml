@@ -1,0 +1,35 @@
+target: "xls:///in.xlsx#ダミーシート"
+row: 5
+limit: 10
+fields: &fields
+- column: ID
+  name: 連番
+  type: int
+
+- column: FamilyName
+  name: 姓
+  type: char
+
+- column: FirstName
+  name: 名
+  type: char
+
+- column: Birthday
+  name: 生年月日
+  type: datetime
+
+- column: Preference
+  name: 出身地
+  type: foreignkey
+  relation:
+    column: ID
+    from: cs_preference.yaml
+    key: Name
+handler:
+  type: csharp
+  csharp: cs_user.cs
+  json: cs_user.json
+  name: User
+  indent: 4
+  sort_keys: true
+  fields: *fields
