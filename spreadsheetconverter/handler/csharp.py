@@ -29,9 +29,9 @@ class Handler(BaseHandler):
                 member = 'public {0} {1};'.format(csharp_type, member_name)
                 members.append(member)
             else:
-                member_name = '_' + name
-                property_name = name
                 new_type = field['relation']['from'].rules['name']
+                member_name = name + '_' + new_type
+                property_name = name
 
                 member = 'public {0} {1};'.format('int', member_name)
                 members.append(member)
