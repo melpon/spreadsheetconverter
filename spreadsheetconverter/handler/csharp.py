@@ -13,7 +13,7 @@ class Handler(BaseHandler):
         inits = []
         properties = []
 
-        for i, field in enumerate(self._config['fields']):
+        for i, field in enumerate(self._config.rules['fields']):
             name = field['column']
             type_ = field['type']
             if type_ != 'foreignkey':
@@ -31,7 +31,7 @@ class Handler(BaseHandler):
             else:
                 member_name = '_' + name
                 property_name = name
-                new_type = field['relation']['from'].rules['handler']['name']
+                new_type = field['relation']['from'].rules['name']
 
                 member = 'public {0} {1};'.format('int', member_name)
                 members.append(member)
@@ -77,20 +77,20 @@ namespace MasterDataTable
     }}
 }}
 """.format(
-            self._config['name'],
+            self._config.rules['name'],
             ("\n" + " " * 8).join(members),
             ("\n" + " " * 12).join(inits),
             ("\n" + " " * 8).join(properties))
 
     def save(self, data):
-        with open(self._config['csharp'], 'w') as f:
+        with open(self.handler_config['csharp'], 'w') as f:
             f.write(self._make_csharp())
 
-        with open(self._config['json'], 'w') as f:
-            keys = [field['column'] for field in self._config['fields']]
+        with open(self.handler_config['json'], 'w') as f:
+            keys = [field['column'] for field in self._config.rules['fields']]
             converted_data = [[entity[key] for key in keys] for entity in data]
-            indent = self._config.get('indent')
-            sort_keys = self._config.get('sort_keys', False)
+            indent = self.handler_config.get('indent')
+            sort_keys = self.handler_config.get('sort_keys', False)
             f.write(json.dumps(converted_data, indent=indent, sort_keys=sort_keys))
 
     def get_value_formatter(self, setting):

@@ -1,7 +1,16 @@
 target: "xls:///in.xlsx#ダミーシート"
+name: User
 row: 5
 limit: 10
-fields: &fields
+
+handler:
+  type: csharp
+  csharp: cs_user.cs
+  json: cs_user.json
+  indent: 4
+  sort_keys: true
+
+fields:
 - column: ID
   name: 連番
   type: int
@@ -25,11 +34,3 @@ fields: &fields
     column: ID
     from: cs_preference.yaml
     key: Name
-handler:
-  type: csharp
-  csharp: cs_user.cs
-  json: cs_user.json
-  name: User
-  indent: 4
-  sort_keys: true
-  fields: *fields
